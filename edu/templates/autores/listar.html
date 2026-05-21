@@ -1,0 +1,38 @@
+{% extends 'baseedu.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="text-success">✍️ Autores</h2>
+    <a href="{% url 'criar_autor' %}" class="btn btn-success">
+        + Novo Autor
+    </a>
+</div>
+
+<table class="table table-striped table-hover shadow-sm">
+    <thead class="table-success">
+        <tr>
+            <th>Nome</th>
+            <th>Livros</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for autor in autores %}
+        <tr>
+            <td>{{ autor.nome }}</td>
+            <td>
+                {% for livro in autor.livros.all %}
+                    <span class="badge bg-primary">{{ livro.titulo }}</span>
+                {% empty %}
+                    <span class="text-muted">Nenhum livro</span>
+                {% endfor %}
+            </td>
+            <td>
+                <a href="{% url 'editar_autor' autor.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'deletar_autor' autor.id %}" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

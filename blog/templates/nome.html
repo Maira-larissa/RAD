@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomer</title>
+</head>
+<body>
+    <h1>Fala ae, {{ nome }}</h1>
+
+    <h2>{{ now }}</h2>
+
+    {% if is_logged_in %}
+        <h2>Bem vindo de Volta!</h2>
+    {% else %}
+        <h2>Faça login para continuar.</h2>
+    {% endif %}
+
+    {% if role == "admin" %}
+        <h1>eu sabo tu e admin po</h1>
+    {% elif role == "user" %}
+        <h3>meh, tu e so mais um, tlgd</h3>
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>nome</th>
+                <th>preço</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dado in lista_bagulhos %}
+                <tr>
+                    <td>{{ dado.nome }}</td>
+                    <td>{{ dado.preco }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <h3><a href="{% url 'contato' '1020304050' %}">contato</a></h3>
+    <h3><a href="{% url 'home' %}">home</a></h3>
+
+</body>
+</html>

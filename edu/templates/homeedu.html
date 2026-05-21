@@ -1,0 +1,57 @@
+{% extends 'baseedu.html' %}
+{% if user.is_authenticated %}
+<div class="d-flex justify-content-end mb-3">
+    <span class="me-2">Olá, {{ user.username }}!</span>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+    </form>
+</div>
+{% else %}
+<div class="d-flex justify-content-end mb-3">
+    <a href="{% url 'signin' %}" class="btn btn-outline-primary btn-sm me-2">Login</a>
+    <a href="{% url 'signup' %}" class="btn btn-outline-success btn-sm">Cadastrar</a>
+</div>
+{% endif %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4 text-primary">📚 Biblioteca Edu</h1>
+    <p class="lead">Gerencie livros, autores e editoras com facilidade</p>
+</div>
+
+<div class="row g-4">
+    <!-- Livros -->
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100 border-primary">
+            <div class="card-body text-center">
+                <h5 class="card-title text-primary">📘 Livros</h5>
+                <p class="card-text">Veja todos os livros cadastrados ou adicione novos.</p>
+                <a href="{% url 'listar_livros' %}" class="btn btn-primary">Ver Livros</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Autores -->
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100 border-success">
+            <div class="card-body text-center">
+                <h5 class="card-title text-success">✍️ Autores</h5>
+                <p class="card-text">Gerencie autores e os livros que escreveram.</p>
+                <a href="{% url 'listar_autores' %}" class="btn btn-success">Ver Autores</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Editoras -->
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100 border-info">
+            <div class="card-body text-center">
+                <h5 class="card-title text-info">🏢 Editoras</h5>
+                <p class="card-text">Cadastre editoras e associe aos livros.</p>
+                <a href="{% url 'listar_editoras' %}" class="btn btn-info">Ver Editoras</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

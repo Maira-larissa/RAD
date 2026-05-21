@@ -1,0 +1,38 @@
+{% extends 'baseedu.html' %}
+
+{% block content %}
+
+{% if perms.edu.add_livro %}
+
+<div class="card shadow">
+    <div class="card-header bg-primary text-white">
+        <h4>📚 Cadastro de Livro</h4>
+    </div>
+
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+
+            <button class="btn btn-success">Salvar</button>
+            <a href="/edu/livros/" class="btn btn-secondary">Voltar</a>
+
+        </form>
+    </div>
+</div>
+
+{% else %}
+
+<div class="alert alert-danger">
+    Você não tem permissão para cadastrar livros.
+</div>
+
+{% endif %}
+
+{% endblock %}
